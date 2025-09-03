@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { SettingsIcon, SaveIcon } from "lucide-react"
-import { useMemberContext } from "@/lib/member-context"
+import { useMemberContext, type Member } from "@/lib/member-context"
 
 export function AdminPanel() {
   const [isOpen, setIsOpen] = useState(false)
@@ -18,7 +18,7 @@ export function AdminPanel() {
   }
 
   const handleFieldUpdate = (memberName: string, field: string, value: number) => {
-    updateMember(memberName, field as any, value)
+    updateMember(memberName, field as keyof Member, value)
   }
 
   if (!isOpen) {

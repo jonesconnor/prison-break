@@ -5,7 +5,7 @@ import { Elements, CardElement, useStripe, useElements } from '@stripe/react-str
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { LoaderIcon, CheckIcon } from 'lucide-react'
+import { LoaderIcon } from 'lucide-react'
 import getStripe from '@/lib/stripe'
 
 const cardElementOptions = {
@@ -90,7 +90,7 @@ function CheckoutForm({ amount, onSuccess, onCancel }: CheckoutFormProps) {
       } else if (paymentIntent?.status === 'succeeded') {
         onSuccess()
       }
-    } catch (err) {
+    } catch {
       setError('Something went wrong. Please try again.')
       setIsProcessing(false)
     }
