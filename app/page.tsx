@@ -3,7 +3,6 @@ import { CollectiveProgress } from "@/components/collective-progress"
 import { MemberProfiles } from "@/components/member-profiles"
 import { ProductShowcase } from "@/components/product-showcase"
 import { DonationSection } from "@/components/donation-section"
-import { AdminPanel } from "@/components/admin-panel"
 import { MemberProvider } from "@/lib/member-context"
 
 export default function HomePage() {
