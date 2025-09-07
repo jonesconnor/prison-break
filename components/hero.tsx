@@ -21,7 +21,7 @@ export function Hero() {
             </h1>
           </div>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-balance">
-            Three tech professionals breaking free from corporate prison, through accountability, collaboration, and
+            Three tech professionals <span style={{ color: '#E6A500' }}>breaking free</span> from corporate prison, through accountability, collaboration, and
             strategic career planning.
           </p>
           
