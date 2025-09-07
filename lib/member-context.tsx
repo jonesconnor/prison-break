@@ -5,7 +5,7 @@ import React, { createContext, useContext, useState, ReactNode } from 'react'
 export interface Member {
   name: string
   role: string
-  company: string
+  contributor: string
   progress: number
   applications: number
   interviews: number
@@ -15,6 +15,9 @@ export interface Member {
   linkedin: string
   github: string
   twitter: string
+  coreSkills: string
+  projects: string[]
+  weakness: string
 }
 
 interface MemberContextType {
@@ -26,46 +29,55 @@ const MemberContext = createContext<MemberContextType | undefined>(undefined)
 
 const initialMembers: Member[] = [
   {
-    name: "Cole",
-    role: "Product Analyst",
-    company: "Intellify",
+    name: "Connor Jones",
+    role: "Software Developer",
+    contributor: "Contributor 001",
     progress: 20,
     applications: 8,
     interviews: 3,
     productsLaunched: 2,
-    avatar: "/professional-headshot-cole.png",
-    initials: "CBP",
-    linkedin: "https://www.linkedin.com/in/colebeevor-potts/",
-    github: "",
-    twitter: "",
-  },
-  {
-    name: "Harry",
-    role: "Product Analyst",
-    company: "Intellify",
-    progress: 45,
-    applications: 6,
-    interviews: 2,
-    productsLaunched: 1,
-    avatar: "/professional-headshot-harry.png",
-    initials: "HM",
-    linkedin: "https://www.linkedin.com/in/hmckin/",
-    github: "",
-    twitter: "https://x.com/butimjust_harry",
-  },
-  {
-    name: "Connor",
-    role: "SDE I",
-    company: "Bell Canada",
-    progress: 30,
-    applications: 12,
-    interviews: 1,
-    productsLaunched: 3,
-    avatar: "/professional-headshot-connor.png",
+    avatar: "/Connor.png",
     initials: "CJ",
     linkedin: "www.linkedin.com/in/connorgarrettjones",
     github: "https://github.com/jonesconnor",
     twitter: "https://x.com/jonesconnorg",
+    coreSkills: "Python, Networking & Cloud Infra",
+    projects: ["001", "003", "006", "007"],
+    weakness: "Persian women",
+  },
+  {
+    name: "Cole Beevor-Potts",
+    role: "Product Manager",
+    contributor: "Contributor 002",
+    progress: 45,
+    applications: 6,
+    interviews: 2,
+    productsLaunched: 1,
+    avatar: "/Cole.png",
+    initials: "CBP",
+    linkedin: "https://www.linkedin.com/in/colebeevor-potts/",
+    github: "",
+    twitter: "https://x.com/beevor79178",
+    coreSkills: "User Research, DevOps & Figma",
+    projects: ["001", "002", "003", "005"],
+    weakness: "Fantasy football",
+  },
+  {
+    name: "Harry McKinney",
+    role: "Product Analyst",
+    contributor: "Contributor 003",
+    progress: 30,
+    applications: 12,
+    interviews: 1,
+    productsLaunched: 3,
+    avatar: "/Harry.png",
+    initials: "HM",
+    linkedin: "https://www.linkedin.com/in/hmckin/",
+    github: "https://github.com/hmckin",
+    twitter: "https://x.com/butimjust_harry",
+    coreSkills: "Figma, Next.js & UI/UX",
+    projects: ["001", "002", "004", "008"],
+    weakness: "Neck kisses",
   },
 ]
 
