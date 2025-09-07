@@ -11,20 +11,22 @@ function Progress({
   ...props
 }: React.ComponentProps<typeof ProgressPrimitive.Root>) {
   return (
-    <ProgressPrimitive.Root
-      data-slot="progress"
-      className={cn(
-        "bg-primary/20 relative h-2 w-full overflow-hidden rounded-full",
-        className
-      )}
-      {...props}
-    >
-      <ProgressPrimitive.Indicator
-        data-slot="progress-indicator"
-        className="bg-primary h-full w-full flex-1 transition-all"
-        style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
-      />
-    </ProgressPrimitive.Root>
+    <div className={cn("border border-primary rounded-full py-4 px-2 flex items-center", className)}>
+      <ProgressPrimitive.Root
+        data-slot="progress"
+        className="bg-primary/20 relative h-4 w-full overflow-hidden rounded-full"
+        {...props}
+      >
+        <ProgressPrimitive.Indicator
+          data-slot="progress-indicator"
+          className="bg-primary h-full w-full flex-1 transition-all"
+          style={{ 
+            transform: `translateX(-${100 - Math.max(value || 0, 1)}%)`,
+            minWidth: '1%'
+          }}
+        />
+      </ProgressPrimitive.Root>
+    </div>
   )
 }
 

@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
 import { TrophyIcon } from "lucide-react"
 
 export function CollectiveProgress() {
@@ -24,13 +23,6 @@ export function CollectiveProgress() {
           <p className="text-muted-foreground">Members Successfully Escaped</p>
         </div>
 
-        <div className="space-y-2">
-          <div className="flex justify-between text-sm">
-            <span>Progress to Freedom</span>
-            <span>{progressPercentage.toFixed(0)}%</span>
-          </div>
-          <Progress value={progressPercentage} className="h-3" />
-        </div>
 
         <div className="grid grid-cols-3 gap-4 text-center">
           <div className="space-y-1">

@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { SectionHeader } from "@/components/ui/section-header"
 import { CoffeeIcon, BookIcon, LaptopIcon, GraduationCapIcon, CheckIcon } from "lucide-react"
 import { PaymentForm } from "@/components/payment-form"
 
@@ -79,7 +80,7 @@ export function DonationSection() {
         <Card className="bg-card border-border">
           <CardContent className="p-8 text-center">
             <CheckIcon className="h-16 w-16 text-primary mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-foreground mb-2">Thank You!</h2>
+            <SectionHeader>Thank You!</SectionHeader>
             <p className="text-muted-foreground">
               Your donation of ${selectedAmount} will help fund our escape plan. We appreciate your support!
             </p>
@@ -113,15 +114,8 @@ export function DonationSection() {
 
   return (
     <section className="space-y-6">
-      <Card className="bg-card border-border">
-        <CardHeader className="text-center">
-          <CardTitle className="text-3xl font-bold text-foreground">Fund Our Escape Plan</CardTitle>
-          <p className="text-muted-foreground text-lg">
-            Help us break free by supporting our career transition journey
-          </p>
-        </CardHeader>
-
-        <CardContent>
+        <SectionHeader>Fund Our Escape Plan</SectionHeader>
+      <div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {donationTiers.map((tier) => (
               <Card key={tier.name} className="bg-muted border-border hover:shadow-md transition-shadow">
@@ -133,7 +127,7 @@ export function DonationSection() {
                   </div>
                   <p className="text-sm text-muted-foreground text-balance">{tier.description}</p>
                   <Button 
-                    className="w-full bg-primary hover:bg-primary/90"
+                    variant="outline"
                     onClick={() => handleTierSelect(tier.amount)}
                   >
                     Support ${tier.amount}
@@ -186,8 +180,7 @@ export function DonationSection() {
               </div>
             )}
           </div>
-        </CardContent>
-      </Card>
+      </div>
     </section>
   )
 }
