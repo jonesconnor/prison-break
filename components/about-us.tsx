@@ -4,17 +4,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { SectionHeader } from "@/components/ui/section-header"
 import { LinkedinIcon, GithubIcon, TwitterIcon, BriefcaseIcon } from "lucide-react"
 import { useMemberContext } from "@/lib/member-context"
 
-export function MemberProfiles() {
+export function AboutUs() {
   const { members } = useMemberContext()
   return (
     <section className="space-y-6">
-      <div className="text-center">
-        <h2 className="text-3xl font-bold text-foreground mb-2">The Escapees</h2>
-        <p className="text-muted-foreground">Meet our determined team breaking free from their current roles</p>
-      </div>
+      <SectionHeader>About Us</SectionHeader>
+      <p className="text-muted-foreground text-center">Meet our determined team breaking free from their current roles</p>
 
       <div className="grid md:grid-cols-3 gap-6">
         {members.map((member) => (
@@ -60,9 +59,9 @@ export function MemberProfiles() {
               <div className="flex justify-center gap-2 pt-2">
                 {member.linkedin && (
                   <Button 
-                    variant="outline" 
+                    variant="ghost" 
                     size="sm" 
-                    className="p-2 bg-transparent"
+                    className="p-2 bg-transparent rounded-full"
                     onClick={() => window.open(member.linkedin.startsWith('http') ? member.linkedin : `https://${member.linkedin}`, '_blank')}
                   >
                     <LinkedinIcon className="h-4 w-4" />
@@ -70,9 +69,9 @@ export function MemberProfiles() {
                 )}
                 {member.github && (
                   <Button 
-                    variant="outline" 
+                    variant="ghost" 
                     size="sm" 
-                    className="p-2 bg-transparent"
+                    className="p-2 bg-transparent rounded-full"
                     onClick={() => window.open(member.github.startsWith('http') ? member.github : `https://${member.github}`, '_blank')}
                   >
                     <GithubIcon className="h-4 w-4" />
@@ -80,9 +79,9 @@ export function MemberProfiles() {
                 )}
                 {member.twitter && (
                   <Button 
-                    variant="outline" 
+                    variant="ghost" 
                     size="sm" 
-                    className="p-2 bg-transparent"
+                    className="p-2 bg-transparent rounded-full"
                     onClick={() => window.open(member.twitter.startsWith('http') ? member.twitter : `https://${member.twitter}`, '_blank')}
                   >
                     <TwitterIcon className="h-4 w-4" />

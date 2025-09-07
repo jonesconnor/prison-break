@@ -2,6 +2,7 @@
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { SectionHeader } from "@/components/ui/section-header"
 import { ChevronLeftIcon, ChevronRightIcon, ExternalLinkIcon } from "lucide-react"
 import { useState } from "react"
 import Image from "next/image"
@@ -63,10 +64,8 @@ export function ProductShowcase() {
 
   return (
     <section className="space-y-6">
-      <div className="text-center">
-        <h2 className="text-3xl font-bold text-foreground mb-2">Built by Escapees</h2>
-        <p className="text-muted-foreground">Products and applications crafted by our team members</p>
-      </div>
+      <SectionHeader>Built by Escapees</SectionHeader>
+      <p className="text-muted-foreground text-center">Products and applications crafted by our team members</p>
 
       <div className="relative">
         <Card className="bg-card border-border overflow-hidden">
@@ -107,10 +106,9 @@ export function ProductShowcase() {
 
                 <Button
                   onClick={() => window.open(currentProduct.link, '_blank')}
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                  variant="link"
                 >
                   View Project
-                  <ExternalLinkIcon className="ml-2 h-4 w-4" />
                 </Button>
               </div>
             </div>

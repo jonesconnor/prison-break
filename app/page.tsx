@@ -1,6 +1,6 @@
-import { Header } from "@/components/header"
+import { Hero } from "@/components/hero"
 import { CollectiveProgress } from "@/components/collective-progress"
-import { MemberProfiles } from "@/components/member-profiles"
+import { AboutUs } from "@/components/about-us"
 import { ProductShowcase } from "@/components/product-showcase"
 import { DonationSection } from "@/components/donation-section"
 import { MemberProvider } from "@/lib/member-context"
@@ -8,13 +8,20 @@ import { MemberProvider } from "@/lib/member-context"
 export default function HomePage() {
   return (
     <MemberProvider>
-      <main className="min-h-screen bg-background">
-        <Header />
+      <div id="hero">
+        <Hero />
+      </div>
+      <main className="bg-background">
         <div className="container mx-auto px-4 py-8 space-y-12">
-          <CollectiveProgress />
-          <MemberProfiles />
-          <ProductShowcase />
-          <DonationSection />
+          <div id="about">
+            <AboutUs />
+          </div>
+          <div id="projects">
+            <ProductShowcase />
+          </div>
+          <div id="donation">
+            <DonationSection />
+          </div>
         </div>
       </main>
     </MemberProvider>
