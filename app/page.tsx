@@ -1,5 +1,4 @@
 import { Hero } from "@/components/hero"
-import { CollectiveProgress } from "@/components/collective-progress"
 import { AboutUs } from "@/components/about-us"
 import { ProductShowcase } from "@/components/product-showcase"
 import { DonationSection } from "@/components/donation-section"

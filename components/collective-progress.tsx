@@ -4,7 +4,6 @@ import { TrophyIcon } from "lucide-react"
 export function CollectiveProgress() {
   const escapees = 0
   const totalMembers = 3
-  const progressPercentage = (escapees / totalMembers) * 100
 
   return (
     <Card className="bg-card border-border">
