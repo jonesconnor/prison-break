@@ -21,7 +21,7 @@ export function Header() {
       
       {/* Navigation */}
       <div className="flex flex-col items-start justify-between h-3/5 py-8 pl-8">
-        {navItems.map((item, index) => (
+        {navItems.map((item) => (
           <Link
             key={item.name}
             href={item.href}
