@@ -3,6 +3,8 @@ import { CollectiveProgress } from "@/components/collective-progress"
 import { AboutUs } from "@/components/about-us"
 import { ProductShowcase } from "@/components/product-showcase"
 import { DonationSection } from "@/components/donation-section"
+import { Why10 } from "@/components/why10"
+import { Contact } from "@/components/contact"
 import { MemberProvider } from "@/lib/member-context"
 
 export default function HomePage() {
@@ -21,6 +23,12 @@ export default function HomePage() {
           </div>
           <div id="donation">
             <DonationSection />
+          </div>
+          <div id="why10">
+            <Why10 />
+          </div>
+          <div id="contact">
+            <Contact />
           </div>
         </div>
       </main>

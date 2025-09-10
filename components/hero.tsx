@@ -10,10 +10,21 @@ export function Hero() {
 
   return (
     <>
-      <Header />
+      <div className="hidden md:block">
+        <Header />
+      </div>
       <header className="bg-card h-screen flex items-center justify-center relative">
+        {/* Logo */}
+        <div className="absolute left-0 top-0 z-50">
+          <div className="flex flex-col items-start justify-start h-1/5 pt-8 pl-6">
+            <div className="text-center">
+              <span className="text-4xl font-bold text-foreground">pbw</span>
+              <span className="text-xs text-muted-foreground"> prison break wednesdays</span>
+            </div>
+          </div>
+        </div>
         <div className="container mx-auto px-4">
-        <div className="text-center space-y-8">
+        <div className="text-center space-y-8 relative z-10">
           <div className="flex items-center justify-center gap-2 mb-4">
             <h1 className="text-6xl font-bold text-foreground dotgothic16-regular flex items-end justify-center">
               <span className="animate-typing">.PrisonBreak</span>
@@ -45,9 +56,10 @@ export function Hero() {
             </Button>
           </div>
         </div>
+        </div>
         
         {/* Keyboard image positioned behind content, off to the right */}
-        <div className="absolute right-0 top-1/3 transform -translate-y-1/2 z-0 opacity-70">
+        <div className="absolute right-0 top-1/4 md:top-1/3 transform -translate-y-1/2 z-0 opacity-70">
           <Image
             src="/keyboard.png"
             alt="Keyboard"
@@ -56,8 +68,7 @@ export function Hero() {
             className="object-contain"
           />
         </div>
-      </div>
-    </header>
+      </header>
     </>
   )
 }
