@@ -56,7 +56,7 @@ const initialMembers: Member[] = [
     avatar: "/Cole.png",
     initials: "CBP",
     linkedin: "https://www.linkedin.com/in/colebeevor-potts/",
-    github: "",
+    github: "https://github.com/colebpotts",
     twitter: "https://x.com/beevor79178",
     coreSkills: "User Research, DevOps & Figma",
     projects: ["001", "002", "003", "005"],
