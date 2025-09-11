@@ -12,7 +12,7 @@ import { useMemberContext } from "@/lib/member-context"
 export function AboutUs() {
   const { members } = useMemberContext()
   return (
-    <section className="h-screen flex items-start justify-center space-y-12">
+    <section className="flex items-start justify-center space-y-12">
       <div className="container mx-auto px-4 space-y-4">
         <SectionHeader>About Us</SectionHeader>
         <p className="text-muted-foreground text-left text-lg">Meet our determined team breaking free from their current roles</p>

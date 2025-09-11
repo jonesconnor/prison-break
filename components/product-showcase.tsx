@@ -27,10 +27,10 @@ const products: Product[] = [
   },
   {
     id: "2", 
-    title: "Shit Jira",
-    description: "Project Management - Minimalist Edition.",
+    title: "Barebones",
+    description: "Project Management - Minimalist Edition",
     link: "https://example.com/taskmanager",
-    image: "/shit-jira.png",
+    image: "/barebones.png",
     keyContributor: "Harry"
   },
   {
@@ -64,8 +64,8 @@ export function ProductShowcase() {
 
   return (
     <section className="space-y-6">
-      <SectionHeader>Built by Escapees</SectionHeader>
-      <p className="text-muted-foreground text-center">Products and applications crafted by our team members</p>
+      <SectionHeader>Built by Us</SectionHeader>
+      <p className="text-muted-foreground text-left">Products and applications crafted by our team members</p>
 
       <div className="relative">
         <Card className="bg-card border-border overflow-hidden">
@@ -121,7 +121,7 @@ export function ProductShowcase() {
             <Button
               variant="outline"
               size="icon"
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-background/80 backdrop-blur-sm border-border hover:bg-background/90"
+              className="absolute -left-16 top-1/2 transform -translate-y-1/2 bg-background/80 backdrop-blur-sm border-border hover:bg-background/90"
               onClick={prevProduct}
             >
               <ChevronLeftIcon className="h-4 w-4" />
@@ -130,7 +130,7 @@ export function ProductShowcase() {
             <Button
               variant="outline"
               size="icon"
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-background/80 backdrop-blur-sm border-border hover:bg-background/90"
+              className="absolute -right-16 top-1/2 transform -translate-y-1/2 bg-background/80 backdrop-blur-sm border-border hover:bg-background/90"
               onClick={nextProduct}
             >
               <ChevronRightIcon className="h-4 w-4" />
