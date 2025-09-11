@@ -14,11 +14,11 @@ export function Contact() {
         {/* Left Column - Text */}
         <div className="space-y-4">
           <p className="text-muted-foreground leading-relaxed">
-            Got an idea for a new project or just want to say hi? Send us an email and we'll reply within 24 hrs!
+            Got an idea for a new project or just want to say hi? Send us an email and we&apos;ll reply within 24 hrs!
           </p>
           
           <p className="text-muted-foreground">
-            If contact forms aren't your thing... send us an email at{" "}
+            If contact forms aren&apos;t your thing... send us an email at{" "}
             <a 
               href="mailto:hello@pisonbreakwednesdays.com" 
               className="text-primary hover:underline"
@@ -49,7 +49,7 @@ export function Contact() {
             </div>
           </div>
 
-{/* Email Field */}
+          {/* Email Field */}
           <div className="space-y-2">
             <Label htmlFor="email">Email *</Label>
             <Input 

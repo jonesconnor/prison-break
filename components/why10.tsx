@@ -9,7 +9,7 @@ export function Why10() {
       
       <div className="space-y-4 text-muted-foreground w-full md:w-1/2">
         <p className="leading-relaxed">
-          $10,000 in MRR will keep us afloat. It's a financial milestone that represents total freedom, 
+          $10,000 in MRR will keep us afloat. It&apos;s a financial milestone that represents total freedom, 
           covering our basic expenses. $10k would break us out of our 9-5s.
         </p>
         
