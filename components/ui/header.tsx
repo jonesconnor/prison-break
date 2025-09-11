@@ -9,11 +9,11 @@ export function Header() {
     { name: "home", href: "#hero" },
   ]
 
-  return (
+ return (
     <header className="absolute left-0 top-0 h-screen w-8 bg-background z-50">
       {/* Navigation */}
       <div className="flex flex-col items-start justify-center h-1/2 translate-y-1/2 pl-6 space-y-24">
-        {navItems.map((item) => (
+        {navItems.map((item, index) => (
           <Link
             key={item.name}
             href={item.href}
