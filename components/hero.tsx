@@ -1,12 +1,25 @@
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Header } from "@/components/ui/header"
+import { getMonthlyDonationTotalCents } from "@/lib/stripe-server"
+import { formatCurrency } from "@/lib/utils"
+import { unstable_noStore as noStore } from "next/cache"
 import Image from "next/image"
 
-export function Hero() {
-  const escapees = 0
-  const totalMembers = 3
-  const progressPercentage = (escapees / totalMembers) * 100
+const MONTHLY_GOAL_CENTS = 10000 * 100
+const CURRENCY = "CAD"
+const LOCALE = "en-CA"
+
+export async function Hero() {
+  noStore()
+
+  const monthlyRevenueCents = await getMonthlyDonationTotalCents()
+  const progressPercentage = MONTHLY_GOAL_CENTS
+    ? Math.min((monthlyRevenueCents / MONTHLY_GOAL_CENTS) * 100, 100)
+    : 0
+
+  const monthlyRevenue = monthlyRevenueCents / 100
+  const monthlyGoal = MONTHLY_GOAL_CENTS / 100
 
   return (
     <>
@@ -37,13 +50,16 @@ export function Hero() {
           </p>
           
            <div className="space-y-2 max-w-2xl mx-auto">
-            <div className="text-md text-left">
+            <div className="flex items-center justify-between text-md">
               <span>Monthly Recurring Revenue</span>
+              <span className="text-sm text-muted-foreground">
+                {formatCurrency(monthlyRevenue, CURRENCY, LOCALE)} raised
+              </span>
             </div>
             <Progress value={progressPercentage} className="h-2" />
             <div className="flex justify-between text-xs text-muted-foreground">
-              <span>$0</span>
-              <span>$10,000</span>
+              <span>{formatCurrency(0, CURRENCY, LOCALE)}</span>
+              <span>{formatCurrency(monthlyGoal, CURRENCY, LOCALE)}</span>
             </div>
           </div>
 
