@@ -6,15 +6,11 @@ export const stripe = stripeSecretKey
   ? new Stripe(stripeSecretKey, { apiVersion: "2025-08-27.basil" })
   : null
 
-export async function getMonthlyDonationTotalCents(): Promise<number> {
+export async function getDonationTotalCents(startTimestamp?: number): Promise<number> {
   if (!stripe) {
-    console.warn("STRIPE_SECRET_KEY is not configured; returning 0 for monthly donations")
+    console.warn("STRIPE_SECRET_KEY is not configured; returning 0 for donations")
     return 0
   }
-
-  const now = new Date()
-  const startOfMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1))
-  const startTimestamp = Math.floor(startOfMonth.getTime() / 1000)
 
   const sumFromIntent = (intent: Stripe.PaymentIntent) => {
     if (intent.status !== "succeeded") return 0
@@ -26,7 +22,16 @@ export async function getMonthlyDonationTotalCents(): Promise<number> {
     let total = 0
     let page: string | undefined
 
-    const query = `status:'succeeded' AND metadata['purpose']:'prison_break_donation' AND created>=${startTimestamp}`
+    const filters = [
+      "status:'succeeded'",
+      "metadata['purpose']:'prison_break_donation'",
+    ]
+
+    if (typeof startTimestamp === "number") {
+      filters.push(`created>=${startTimestamp}`)
+    }
+
+    const query = filters.join(" AND ")
 
     do {
       const result = await stripe.paymentIntents.search({
@@ -47,11 +52,16 @@ export async function getMonthlyDonationTotalCents(): Promise<number> {
     let startingAfter: string | undefined
 
     do {
-      const result = await stripe.paymentIntents.list({
+      const params: Stripe.PaymentIntentListParams = {
         limit: 100,
         starting_after: startingAfter,
-        created: { gte: startTimestamp },
-      })
+      }
+
+      if (typeof startTimestamp === "number") {
+        params.created = { gte: startTimestamp }
+      }
+
+      const result = await stripe.paymentIntents.list(params)
 
       total += result.data.reduce((sum, intent) => sum + sumFromIntent(intent), 0)
       startingAfter = result.data.at(-1)?.id
@@ -69,4 +79,89 @@ export async function getMonthlyDonationTotalCents(): Promise<number> {
     console.error("Stripe search API unavailable; falling back to list", error)
     return sumWithList()
   }
+}
+
+export interface MonthlyMRRMetrics {
+  totalCents: number
+  activeSubscriptions: number
+}
+
+const INCLUDED_SUBSCRIPTION_STATUSES: Stripe.Subscription.Status[] = [
+  "active",
+  "trialing",
+]
+
+export async function getMonthlyMRR(): Promise<MonthlyMRRMetrics> {
+  if (!stripe) {
+    console.warn("STRIPE_SECRET_KEY is not configured; returning 0 for MRR")
+    return { totalCents: 0, activeSubscriptions: 0 }
+  }
+
+  let totalCents = 0
+  let activeSubscriptions = 0
+  let startingAfter: string | undefined
+
+  const calculateMonthlyAmount = (item: Stripe.SubscriptionItem): number => {
+    const price = item.price
+    const recurring = price.recurring
+    if (!recurring) return 0
+
+    const unitAmount = price.unit_amount ?? 0
+    if (!unitAmount) return 0
+
+    const interval = recurring.interval
+    const intervalCount = recurring.interval_count ?? 1
+    const quantity = item.quantity ?? 1
+
+    const occurrencesPerYear = (() => {
+      switch (interval) {
+        case "day":
+          return 365 / intervalCount
+        case "week":
+          return 52 / intervalCount
+        case "month":
+          return 12 / intervalCount
+        case "year":
+          return 1 / intervalCount
+        default:
+          return 0
+      }
+    })()
+
+    if (!occurrencesPerYear) return 0
+
+    const annualAmount = unitAmount * quantity * occurrencesPerYear
+    return Math.round(annualAmount / 12)
+  }
+
+  do {
+    const params: Stripe.SubscriptionListParams = {
+      limit: 100,
+      starting_after: startingAfter,
+      status: "all",
+      expand: ["data.items.data.price"],
+    }
+
+    const result = await stripe.subscriptions.list(params)
+
+    for (const subscription of result.data) {
+      if (!INCLUDED_SUBSCRIPTION_STATUSES.includes(subscription.status)) {
+        continue
+      }
+
+      activeSubscriptions += 1
+
+      for (const item of subscription.items.data) {
+        totalCents += calculateMonthlyAmount(item)
+      }
+    }
+
+    if (result.has_more) {
+      startingAfter = result.data.at(-1)?.id
+    } else {
+      startingAfter = undefined
+    }
+  } while (startingAfter)
+
+  return { totalCents, activeSubscriptions }
 }
