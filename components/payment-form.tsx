@@ -134,7 +134,7 @@ function CheckoutForm({ amount, onSuccess, onCancel }: CheckoutFormProps) {
         <Button
           type="submit"
           disabled={!stripe || isProcessing}
-          className="flex-1 bg-primary hover:bg-primary/90"
+          className="flex-1 bg-primary hover:bg-primary/90 text-white"
         >
           {isProcessing ? (
             <>
