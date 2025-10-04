@@ -19,26 +19,19 @@ interface Product {
 const products: Product[] = [
   {
     id: "1",
-    title: "SEO Type Shi",
-    description: "Google Search Results are my Bitch",
-    link: "https://example.com/analytics",
-    image: "/seo.png",
-    keyContributor: "Cole"
-  },
-  {
-    id: "2", 
     title: "Barebones",
     description: "Project Management - Minimalist Edition",
-    link: "https://example.com/taskmanager",
+    link: "https://barebones-h1.vercel.app",
     image: "/barebones.png",
     keyContributor: "Harry"
   },
   {
-    id: "3",
-    title: "Vistae",
-    description: "Personalized Real Estate Photo Editing Platform",
-    link: "https://example.com/codereview",
-    image: "/house.jpg", 
+    id: "2",
+    title: "ParaNoia",
+    description:
+      "A secure, self-hosted tool for sharing secrets that vanish after a single view. Quickly transfer sensitive information with end-to-end encryption and one-time access, giving you full control over your data.",
+    link: "https://ultraparanoia.vercel.app",
+    image: "/paranoia-fullscreen.gif",
     keyContributor: "Connor"
   }
 ]

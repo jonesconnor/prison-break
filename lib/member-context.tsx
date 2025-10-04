@@ -16,7 +16,6 @@ export interface Member {
   github: string
   twitter: string
   coreSkills: string
-  projects: string[]
   weakness: string
 }
 
@@ -42,7 +41,6 @@ const initialMembers: Member[] = [
     github: "https://github.com/jonesconnor",
     twitter: "https://x.com/jonesconnorg",
     coreSkills: "Python, Networking & Cloud Infra",
-    projects: ["001", "003", "006", "007"],
     weakness: "Persian women",
   },
   {
@@ -59,7 +57,6 @@ const initialMembers: Member[] = [
     github: "https://github.com/colebpotts",
     twitter: "https://x.com/beevor79178",
     coreSkills: "User Research, DevOps & Figma",
-    projects: ["001", "002", "003", "005"],
     weakness: "Fantasy football",
   },
   {
@@ -76,7 +73,6 @@ const initialMembers: Member[] = [
     github: "https://github.com/hmckin",
     twitter: "https://x.com/butimjust_harry",
     coreSkills: "Figma, Next.js & UI/UX",
-    projects: ["001", "002", "004", "008"],
     weakness: "Neck kisses",
   },
 ]
