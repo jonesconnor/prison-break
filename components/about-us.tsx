@@ -55,12 +55,12 @@ export function AboutUs() {
                 <span className="text-sm text-muted-foreground text-right">{member.coreSkills}</span>
               </div>
 
-              <div className="flex justify-between items-center">
+              {/* <div className="flex justify-between items-center">
                 <span className="text-sm font-medium">Projects</span>
                 <span className="text-sm text-muted-foreground text-right">
                   {member.projects.join(", ")}
                 </span>
-              </div>
+              </div> */}
 
               <div className="flex justify-between items-center">
                 <span className="text-sm font-medium">Weakness</span>
