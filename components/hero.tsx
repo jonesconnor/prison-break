@@ -1,25 +1,32 @@
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Header } from "@/components/ui/header"
-import { getMonthlyDonationTotalCents } from "@/lib/stripe-server"
+import { getDonationTotalCents, getMonthlyMRR } from "@/lib/stripe-server"
 import { formatCurrency } from "@/lib/utils"
 import { unstable_noStore as noStore } from "next/cache"
 import Image from "next/image"
 
-const MONTHLY_GOAL_CENTS = 10000 * 100
+const MRR_GOAL_CENTS = 10000 * 100
 const CURRENCY = "CAD"
 const LOCALE = "en-CA"
 
 export async function Hero() {
   noStore()
 
-  const monthlyRevenueCents = await getMonthlyDonationTotalCents()
-  const progressPercentage = MONTHLY_GOAL_CENTS
-    ? Math.min((monthlyRevenueCents / MONTHLY_GOAL_CENTS) * 100, 100)
+  const [mrrMetrics, donationTotalCents] = await Promise.all([
+    getMonthlyMRR(),
+    getDonationTotalCents(),
+  ])
+
+  const { totalCents: mrrCents } = mrrMetrics
+
+  const progressPercentage = MRR_GOAL_CENTS
+    ? Math.min((mrrCents / MRR_GOAL_CENTS) * 100, 100)
     : 0
 
-  const monthlyRevenue = monthlyRevenueCents / 100
-  const monthlyGoal = MONTHLY_GOAL_CENTS / 100
+  const mrr = mrrCents / 100
+  const mrrGoal = MRR_GOAL_CENTS / 100
+  const donationTotal = donationTotalCents / 100
 
   return (
     <>
@@ -49,26 +56,27 @@ export async function Hero() {
             strategic career planning.
           </p>
           
-           <div className="space-y-2 max-w-2xl mx-auto">
+           <div className="space-y-3 max-w-2xl mx-auto">
             <div className="flex items-center justify-between text-md">
-              <span>Monthly Recurring Revenue</span>
-              <span className="text-sm text-muted-foreground">
-                {formatCurrency(monthlyRevenue, CURRENCY, LOCALE)} raised
-              </span>
+              <span>MRR</span>
             </div>
             <Progress value={progressPercentage} className="h-2" />
             <div className="flex justify-between text-xs text-muted-foreground">
-              <span>{formatCurrency(0, CURRENCY, LOCALE)}</span>
-              <span>{formatCurrency(monthlyGoal, CURRENCY, LOCALE)}</span>
+              <span>{formatCurrency(mrr, CURRENCY, LOCALE)}</span>
+              <span>{formatCurrency(mrrGoal, CURRENCY, LOCALE)}</span>
+            </div>
+            <div className="flex items-center justify-between text-sm font-medium text-foreground">
+              <span>Total Donations</span>
+              <span>{formatCurrency(donationTotal, CURRENCY, LOCALE)}</span>
             </div>
           </div>
 
           <div className="flex items-center justify-center gap-4 pt-4">
-            <Button size="lg">
-              Join Our Mission
+            <Button size="lg" asChild>
+              <a href="#donation">Contribute</a>
             </Button>
-            <Button variant="outline" size="lg">
-              View Progress
+            <Button variant="outline" size="lg" asChild>
+              <a href="#why10">Why $10k?</a>
             </Button>
           </div>
         </div>
